@@ -1,5 +1,7 @@
 package Zabgu;
 
+import java.util.List;
+
 public class TreeNode {
     int nodeValue;
     TreeNode left;
@@ -7,6 +9,8 @@ public class TreeNode {
 
     public TreeNode(int nodeValue){
         this.nodeValue = nodeValue;
+        this.left = null;
+        this.right = null;
     }
 
     public void insertNode(int newNodeValue){
@@ -16,6 +20,46 @@ public class TreeNode {
         } else {
             if(right == null) right = new TreeNode(newNodeValue);
             else right.insertNode(newNodeValue);
+        }
+    }
+
+    public void printTreeLNR(){
+        if(left != null){
+            left.printTreeLNR();
+        }
+        System.out.print(nodeValue + " ");
+        if(right != null){
+            right.printTreeLNR();
+        }
+    }
+
+    public void printTreeRNL(){
+        if(right != null){
+            right.printTreeRNL();
+        }
+        System.out.print(nodeValue + " ");
+        if(left != null){
+            left.printTreeRNL();
+        }
+    }
+
+    public void fillingListLNR(List<Integer> list){
+        if (left != null){
+            left.fillingListLNR(list);
+        }
+        list.add(nodeValue);
+        if (right != null){
+            right.fillingListLNR(list);
+        }
+    }
+
+    public void fillingListRNL(List<Integer> list){
+        if(right != null){
+            right.fillingListRNL(list);
+        }
+        list.add(nodeValue);
+        if (left != null){
+            left.fillingListRNL(list);
         }
     }
 
