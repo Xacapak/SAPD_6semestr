@@ -11,12 +11,18 @@ public class GeneratedBinaryTree {
         System.out.print("Введите максимальное число для генерации случайных чисел: ");
         int maxValue = scanner.nextInt();
 
-        TreeNode root = generateRandomTree(nodeCount, maxValue);
+        Comparator<Integer> comparator = Integer::compare;
+        TreeNode <Integer> root = generateRandomTree(nodeCount, maxValue, comparator);
 
         System.out.println("\nСгенерированное бинарное дерево поиска:");
         TreeNode.printTree(root);
 
-        System.out.println("Выберите действие: \n 1) Рекурсивный обход деревьев (LNR и RNL)");
+        System.out.println("Выберите действие: \n 1) Рекурсивный обход деревьев (LNR и RNL)." +
+                                                "\n 2) Вставка нового узла." +
+                                                "\n 3) Поиск узла." +
+                                                "\n 4) Очистка всего дерева." +
+                                                "\n 5) Глубина дерева." +
+                                                "\n 6) Количество узлов в дереве.");
         int TaskNumber = scanner.nextInt();
 
         switch (TaskNumber){
@@ -47,12 +53,12 @@ public class GeneratedBinaryTree {
         }
     }
 
-    public static TreeNode generateRandomTree(int nodeCount, int maxValue){
+    public static TreeNode <Integer> generateRandomTree(int nodeCount, int maxValue, Comparator<Integer> comparator){
         if (nodeCount <= 0) return null;
 
         Random random = new Random();
         Set<Integer> values = new HashSet<>();
-        TreeNode root = null;
+        TreeNode<Integer> root = null;
 
         while (values.size() < nodeCount) {
             values.add(random.nextInt(maxValue) + 1);
@@ -60,9 +66,9 @@ public class GeneratedBinaryTree {
 
         for (int value : values) {
             if (root == null) {
-                root = new TreeNode(value);
+                root = new TreeNode<>(value);
             } else {
-                root.insertNode(value);
+                root.insertNode(value, comparator);
             }
         }
 

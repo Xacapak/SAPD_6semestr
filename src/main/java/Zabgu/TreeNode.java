@@ -1,25 +1,26 @@
 package Zabgu;
 
+import java.util.Comparator;
 import java.util.List;
 
-public class TreeNode {
-    int nodeValue;
-    TreeNode left;
-    TreeNode right;
+public class TreeNode<T> {
+    T value;
+    TreeNode<T> left;
+    TreeNode <T> right;
 
-    public TreeNode(int nodeValue){
-        this.nodeValue = nodeValue;
+    public TreeNode(T value){
+        this.value = value;
         this.left = null;
         this.right = null;
     }
 
-    public void insertNode(int newNodeValue){
-        if(newNodeValue < nodeValue){
-            if(left == null) left = new TreeNode(newNodeValue);
-            else left.insertNode(newNodeValue);
+    public void insertNode(T newNodeValue, Comparator<T> comparator){
+        if(comparator.compare(newNodeValue, value) < 0) {
+            if(left == null) left = new TreeNode<>(newNodeValue);
+            else left.insertNode(newNodeValue, comparator);
         } else {
-            if(right == null) right = new TreeNode(newNodeValue);
-            else right.insertNode(newNodeValue);
+            if(right == null) right = new TreeNode<>(newNodeValue);
+            else right.insertNode(newNodeValue, comparator);
         }
     }
 
@@ -27,7 +28,7 @@ public class TreeNode {
         if(left != null){
             left.printTreeLNR();
         }
-        System.out.print(nodeValue + " ");
+        System.out.print(value + " ");
         if(right != null){
             right.printTreeLNR();
         }
@@ -37,47 +38,46 @@ public class TreeNode {
         if(right != null){
             right.printTreeRNL();
         }
-        System.out.print(nodeValue + " ");
+        System.out.print(value + " ");
         if(left != null){
             left.printTreeRNL();
         }
     }
 
-    public void fillingListLNR(List<Integer> list){
+    public void fillingListLNR(List<T> list){
         if (left != null){
             left.fillingListLNR(list);
         }
-        list.add(nodeValue);
+        list.add(value);
         if (right != null){
             right.fillingListLNR(list);
         }
     }
 
-    public void fillingListRNL(List<Integer> list){
+    public void fillingListRNL(List<T> list){
         if(right != null){
             right.fillingListRNL(list);
         }
-        list.add(nodeValue);
+        list.add(value);
         if (left != null){
             left.fillingListRNL(list);
         }
     }
 
-    public static void printTree(TreeNode root){
+    public static <T> void printTree(TreeNode<T> root){
         printTree(root, 0, new StringBuilder());
     }
 
-    public static void printTree(TreeNode node,int level, StringBuilder prefix){
+    public static <T> void printTree(TreeNode <T> node,int level, StringBuilder prefix){
         if (node == null) return;
 
         printTree(node.right, level + 1, new StringBuilder(prefix).append("    "));
 
         if(level == 0){
-            System.out.println(" " + node.nodeValue);
+            System.out.println(" " + node.value);
         } else {
-            System.out.println(prefix + " |---" + node.nodeValue);
+            System.out.println(prefix + " |---" + node.value);
         }
         printTree(node.left, level + 1, new StringBuilder(prefix).append("    "));
     }
-
 }
