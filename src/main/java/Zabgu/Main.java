@@ -8,7 +8,10 @@ public class Main {
     public static void main(String[] args) throws InterruptedException{
 
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Выберите задание:\n 1) Деревья. Бинарные деревья поиска. \n 2) Хеш-таблица.");
+        System.out.println("Выберите задание:\n 1) Деревья. Бинарные деревья поиска. " +
+                                                "\n 2) Хеш-таблица." +
+                                                "\n 3) АВЛ деревья." +
+                                                "\n 4) Словарь.");
         int TaskNumber = scanner.nextInt();
 
         switch (TaskNumber){
@@ -125,6 +128,53 @@ public class Main {
                 // Тесты
                 HashTableTests.runAllTests();
 
+                break;
+            }
+            case 3: {
+                System.out.println("3) АВЛ деревья.");
+
+                AVLTree<Integer> avlTree = new AVLTree<>();
+
+                // Вставка элементов
+                System.out.println("Вставка элементов: 10, 20, 30, 40, 50, 25");
+                avlTree.insert(10);
+                avlTree.insert(20);
+                avlTree.insert(30);
+                avlTree.insert(40);
+                avlTree.insert(50);
+                avlTree.insert(25);
+
+                // Вывод дерева
+                System.out.println("\nОбход дерева в порядке in-order:");
+                avlTree.inOrder();
+
+                // Поиск элементов
+                System.out.println("\n\nПоиск элементов:");
+                System.out.println("Содержит 30? " + avlTree.contains(30));
+                System.out.println("Содержит 35? " + avlTree.contains(35));
+
+                // Удаление элемента
+                System.out.println("\nУдаление элемента 30");
+                avlTree.delete(30);
+                System.out.println("Обход дерева после удаления:");
+                avlTree.inOrder();
+
+                // Вывод высоты дерева
+                System.out.println("\n\nВысота дерева: " + avlTree.height());
+
+                AVLPerformanceTest.testSearchPerformance();
+
+                AVLTests.runAllTests();
+
+                Iterator<Integer> iterator = new BSTInOrderIterator<>(avlTree.getRoot());
+                while (iterator.hasNext()) {
+                    System.out.print(iterator.next());
+                }
+
+                break;
+            }
+            case 4: {
+                System.out.println("4) Словарь.");
                 break;
             }
             default:
