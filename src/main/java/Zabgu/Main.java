@@ -175,6 +175,60 @@ public class Main {
             }
             case 4: {
                 System.out.println("4) Словарь.");
+
+                // Создаем словарь
+                Dictionary<String, Integer> dictionary = new Dictionary<>();
+
+                // Добавление элементов
+                System.out.println("Добавление элементов: {'apple': 10}, {'banana': 20}, {'orange': 30}, {'grape': 40}, {'melon': 50}");
+                dictionary.put("apple", 10);
+                dictionary.put("banana", 20);
+                dictionary.put("orange", 30);
+                dictionary.put("grape", 40);
+                dictionary.put("melon", 50);
+
+                // Вывод всех элементов
+                System.out.println("\nВсе элементы словаря:");
+                for (Dictionary.Entry<String, Integer> entry : dictionary) {
+                    System.out.println(entry.getKey() + " => " + entry.getValue());
+                }
+
+                // Поиск элементов
+                System.out.println("\nПоиск элементов:");
+                System.out.println("Значение для 'banana': " + dictionary.get("banana"));
+                System.out.println("Значение для 'pear': " + dictionary.get("pear"));
+                System.out.println("Содержит ключ 'orange'? " + dictionary.containsKey("orange"));
+                System.out.println("Содержит ключ 'kiwi'? " + dictionary.containsKey("kiwi"));
+
+                // Удаление элемента
+                System.out.println("\nУдаление элемента 'orange'");
+                dictionary.remove("orange");
+                System.out.println("Все элементы после удаления:");
+                for (Dictionary.Entry<String, Integer> entry : dictionary) {
+                    System.out.println(entry.getKey() + " => " + entry.getValue());
+                }
+
+                // Размер словаря
+                System.out.println("\nКоличество элементов в словаре: " + dictionary.size());
+
+                // Проверка на пустоту
+                System.out.println("Словарь пустой? " + dictionary.isEmpty());
+
+                // Получение всех ключей и значений
+                System.out.println("\nВсе ключи: " + dictionary.keySet());
+                System.out.println("Все значения: " + dictionary.values());
+
+                // Очистка словаря
+                System.out.println("\nОчистка словаря");
+                dictionary.clear();
+                System.out.println("Словарь пустой? " + dictionary.isEmpty());
+                System.out.println("Количество элементов: " + dictionary.size());
+
+                // Тестирование производительности поиска
+                DictionaryPerformanceTest.testSearchPerformance();
+
+                DictionaryTests.runAllTests();
+
                 break;
             }
             default:
