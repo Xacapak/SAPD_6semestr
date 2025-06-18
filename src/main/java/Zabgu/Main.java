@@ -79,6 +79,52 @@ public class Main {
             }
             case 2:{
                 System.out.println("2) Хеш-таблица.");
+
+                // Создаем хеш-таблицу с целочисленными ключами и строковыми значениями
+                // Используем простую хеш-функцию (остаток от деления)
+                HashTable<Integer, String> table = new HashTable<>(10, key -> key % 10);
+
+                // Вставка элементов
+                table.put(1, "Apple");
+                table.put(2, "Banana");
+                table.put(11, "Orange"); // Коллизия с ключом 1
+                table.put(12, "Grape");  // Коллизия с ключом 2
+                table.put(21, "Mango");  // Коллизия с ключом 1
+
+                // Вывод размера таблицы
+                System.out.println("Размер таблицы: " + table.size());
+
+                // Поиск элементов
+                System.out.println("Поиск ключа 1: " + table.get(1));
+                System.out.println("Поиск ключа 11: " + table.get(11));
+                System.out.println("Поиск ключа 21: " + table.get(21));
+                System.out.println("Поиск несуществующего ключа 3: " + table.get(3));
+
+                // Удаление элемента
+                System.out.println("\nУдаление ключа 11...");
+                table.remove(11);
+                System.out.println("Поиск ключа 11 после удаления: " + table.get(11));
+                System.out.println("Размер таблицы после удаления: " + table.size());
+
+                // Использование итератора
+                System.out.println("\nИтерация по элементам таблицы:");
+                Iterator<HashTable.Entry<Integer, String>> iterator = new HashTableIterator<>(table);
+                while (iterator.hasNext()) {
+                    HashTable.Entry<Integer, String> entry = iterator.next();
+                    System.out.println("Ключ: " + entry.key + ", Значение: " + entry.value);
+                }
+
+                // Очистка таблицы
+                System.out.println("\nОчистка таблицы...");
+                table.clear();
+                System.out.println("Размер таблицы после очистки: " + table.size());
+
+                // Оценка среднего времени поиска
+                HashTablePerformanceTest.testSearchPerformance();
+
+                // Тесты
+                HashTableTests.runAllTests();
+
                 break;
             }
             default:
