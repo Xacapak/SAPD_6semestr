@@ -162,13 +162,17 @@ public class Main {
                 // Вывод высоты дерева
                 System.out.println("\n\nВысота дерева: " + avlTree.height());
 
+                // Оценка среднего времени поиска
                 AVLPerformanceTest.testSearchPerformance();
 
+                // Тесты
                 AVLTests.runAllTests();
 
+                // Использование итератора
+                System.out.println("\nИтерация по элементам:");
                 Iterator<Integer> iterator = new BSTInOrderIterator<>(avlTree.getRoot());
                 while (iterator.hasNext()) {
-                    System.out.print(iterator.next());
+                    System.out.print(iterator.next() + " ");
                 }
 
                 break;

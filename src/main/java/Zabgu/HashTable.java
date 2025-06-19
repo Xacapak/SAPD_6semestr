@@ -10,8 +10,8 @@ import java.util.function.Function;
  * @param <V> тип значения
  */
 class HashTable<K, V> {
-    private LinkedList<Entry<K, V>>[] table;
-    private Function<K, Integer> hashFunction;
+    private LinkedList<Entry<K, V>>[] table;    // Массив связных списков для хранения элементов
+    private Function<K, Integer> hashFunction;  // Функция для вычисления хеша ключа
     private int size;
 
     /**
@@ -21,8 +21,8 @@ class HashTable<K, V> {
      */
     @SuppressWarnings("unchecked")
     public HashTable(int capacity, Function<K, Integer> hashFunction) {
-        this.table = new LinkedList[capacity];
-        this.hashFunction = hashFunction;
+        this.table = new LinkedList[capacity];  // Инициализация массива заданной емкости
+        this.hashFunction = hashFunction;       // Установка функции хеширования
         this.size = 0;
     }
 
@@ -36,15 +36,15 @@ class HashTable<K, V> {
             throw new IllegalArgumentException("Ключ не может быть null");
         }
 
-        int index = getIndex(key);
+        int index = getIndex(key);                  // Вычисление индекса в массиве
         if (table[index] == null) {
-            table[index] = new LinkedList<>();
+            table[index] = new LinkedList<>();      // Создание нового списка, если корзина пуста
         }
 
         // Проверяем, есть ли уже такой ключ в цепочке
         for (Entry<K, V> entry : table[index]) {
             if (entry.key.equals(key)) {
-                entry.value = value; // Обновляем значение
+                entry.value = value; // Обновление значения, если ключ уже существует
                 return;
             }
         }
@@ -64,19 +64,19 @@ class HashTable<K, V> {
             return null;
         }
 
-        int index = getIndex(key);
+        int index = getIndex(key);      // Вычисление индекса
         if (table[index] == null) {
-            return null;
+            return null;                // Возврат null, если корзина пуста
         }
 
         // Ищем ключ в цепочке
         for (Entry<K, V> entry : table[index]) {
             if (entry.key.equals(key)) {
-                return entry.value;
+                return entry.value;     // Возврат значения, если ключ найден
             }
         }
 
-        return null;
+        return null;                    // Ключ не найден
     }
 
     /**
@@ -91,7 +91,7 @@ class HashTable<K, V> {
 
         int index = getIndex(key);
         if (table[index] == null) {
-            return null;
+            return null;                    // Корзина пуста - ничего удалять
         }
 
         // Ищем ключ в цепочке для удаления
@@ -100,13 +100,13 @@ class HashTable<K, V> {
             Entry<K, V> entry = iterator.next();
             if (entry.key.equals(key)) {
                 V value = entry.value;
-                iterator.remove();
+                iterator.remove();          // Удаление элемента через итератор
                 size--;
-                return value;
+                return value;               // Возврат удаленного значения
             }
         }
 
-        return null;
+        return null;                        // Элемент не найден
     }
 
     /**
@@ -139,8 +139,8 @@ class HashTable<K, V> {
 
     // Вспомогательный метод для вычисления индекса в массиве
     private int getIndex(K key) {
-        int hash = hashFunction.apply(key);
-        return (hash & 0x7FFFFFFF) % table.length; // Обеспечиваем неотрицательный индекс
+        int hash = hashFunction.apply(key);         // Применение функции хеширования
+        return (hash & 0x7FFFFFFF) % table.length;  // Обеспечиваем неотрицательный индекс
     }
 
     // Внутренний класс для хранения пар ключ-значение

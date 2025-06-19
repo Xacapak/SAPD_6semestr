@@ -20,7 +20,7 @@ public class BinSTree<T extends Comparable<T>> {
     }
 
     /**
-     * Выполняет симметричный обход дерева (LNR).
+     * Выполняет обход дерева (LNR).
      *
      * @return список элементов в порядке LNR
      */
@@ -187,9 +187,11 @@ public class BinSTree<T extends Comparable<T>> {
             node.right = removeRec(node.right, value);
         } else {
 
+            // Узел с одним потомком или без потомков
             if (node.left == null) return node.right;
             if (node.right == null) return node.left;
 
+            // Узел с двумя потомками
             node.value = minValue(node.right);
 
             node.right = removeRec(node.right, node.value);
@@ -228,6 +230,7 @@ public class BinSTree<T extends Comparable<T>> {
         return newNode;
     }
 
+    // Возвращает корневой узел дерева (Итератор)
     public TreeNode<T> getRoot(){
         return this.root;
     }

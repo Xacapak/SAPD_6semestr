@@ -4,12 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0a7aea9f-9b6f-4622-abf2-bd1d768f57d5" name="Changes" comment="Задание 3: Выполнено.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Zabgu/Dictionary.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Zabgu/DictionaryPerformanceTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Zabgu/DictionaryTests.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/Dictionary.png" afterDir="false" />
+    <list default="true" id="0a7aea9f-9b6f-4622-abf2-bd1d768f57d5" name="Changes" comment="Задание 4: Выполнено.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Zabgu/AVLTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Zabgu/AVLTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Zabgu/AVLTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Zabgu/AVLTree.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Zabgu/BinSTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Zabgu/BinSTree.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Zabgu/Dictionary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Zabgu/Dictionary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Zabgu/DictionaryTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Zabgu/DictionaryTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Zabgu/HashTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Zabgu/HashTable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Zabgu/HashTableIterator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Zabgu/HashTableIterator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Zabgu/HashTableTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Zabgu/HashTableTests.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Zabgu/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Zabgu/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -103,7 +107,15 @@
       <option name="project" value="LOCAL" />
       <updated>1750270103480</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Задание 4: Выполнено.">
+      <option name="closed" value="true" />
+      <created>1750271302884</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1750271302884</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -124,6 +136,7 @@
     <MESSAGE value="Задание 1: Выполнено." />
     <MESSAGE value="Задание 2: Выполнено." />
     <MESSAGE value="Задание 3: Выполнено." />
-    <option name="LAST_COMMIT_MESSAGE" value="Задание 3: Выполнено." />
+    <MESSAGE value="Задание 4: Выполнено." />
+    <option name="LAST_COMMIT_MESSAGE" value="Задание 4: Выполнено." />
   </component>
 </project>

@@ -8,11 +8,16 @@ public class DictionaryTests {
         testRemove();
         testSize();
         testClear();
-//        testIterator();
-//        testEdgeCases();
         System.out.println("Все тесты словаря пройдены успешно!");
     }
 
+    /**
+     * Тестирует базовые операции добавления и получения элементов.
+     * Проверяет:
+     * 1. Корректность добавления элементов
+     * 2. Корректность получения значений
+     * 3. Поведение при запросе несуществующего ключа
+     */
     private static void testPutAndGet() {
         System.out.println("\nТест 1: Добавление и получение элементов");
         Dictionary<String, Integer> dict = new Dictionary<>();
@@ -28,6 +33,12 @@ public class DictionaryTests {
         System.out.println("Тест 1 пройден успешно");
     }
 
+    /**
+     * Тестирует работу метода containsKey().
+     * Проверяет:
+     * 1. Наличие добавленных ключей
+     * 2. Отсутствие недобавленных ключей
+     */
     private static void testContainsKey() {
         System.out.println("\nТест 2: Проверка наличия ключей");
         Dictionary<Integer, String> dict = new Dictionary<>();
@@ -41,6 +52,13 @@ public class DictionaryTests {
         System.out.println("Тест 2 пройден успешно");
     }
 
+    /**
+     * Тестирует операцию удаления элементов.
+     * Проверяет:
+     * 1. Корректность возвращаемого значения
+     * 2. Фактическое удаление элемента
+     * 3. Изменение размера словаря
+     */
     private static void testRemove() {
         System.out.println("\nТест 3: Удаление элементов");
         Dictionary<String, Double> dict = new Dictionary<>();
@@ -55,6 +73,13 @@ public class DictionaryTests {
         System.out.println("Тест 3 пройден успешно");
     }
 
+    /**
+     * Тестирует корректность работы с размером словаря.
+     * Проверяет:
+     * 1. Размер пустого словаря
+     * 2. Размер после добавления элементов
+     * 3. Размер после удаления элементов
+     */
     private static void testSize() {
         System.out.println("\nТест 4: Размер словаря");
         Dictionary<Character, Boolean> dict = new Dictionary<>();
@@ -70,6 +95,12 @@ public class DictionaryTests {
         System.out.println("Тест 4 пройден успешно");
     }
 
+    /**
+     * Тестирует операцию очистки словаря.
+     * Проверяет:
+     * 1. Обнуление размера
+     * 2. Отсутствие ранее добавленных ключей
+     */
     private static void testClear() {
         System.out.println("\nТест 5: Очистка словаря");
         Dictionary<String, Integer> dict = new Dictionary<>();
@@ -84,54 +115,37 @@ public class DictionaryTests {
         System.out.println("Тест 5 пройден успешно");
     }
 
-//    private static void testIterator() {
-//        System.out.println("\nТест 6: Итератор словаря");
-//        Dictionary<Integer, String> dict = new Dictionary<>();
-//        dict.put(1, "one");
-//        dict.put(2, "two");
-//        dict.put(3, "three");
-//
-//        int count = 0;
-//        for (Dictionary.Entry<Integer, String> entry : dict) {
-//            count++;
-//            assertNotNull(entry.getKey(), "Ключ не должен быть null");
-//            assertNotNull(entry.getValue(), "Значение не должно быть null");
-//        }
-//        assertEquals(3, count, "Итератор должен пройти по всем элементам");
-//
-//        System.out.println("Тест 6 пройден успешно");
-//    }
-
-//    private static void testEdgeCases() {
-//        System.out.println("\nТест 7: Граничные случаи");
-//        Dictionary<String, String> dict = new Dictionary<>();
-//
-//        // Проверка с null значениями
-//        dict.put("key1", null);
-//        assertTrue(dict.containsKey("key1"), "Словарь должен содержать ключ с null значением");
-//        assertNull(dict.get("key1"), "Должно возвращаться null значение");
-//
-//        // Проверка перезаписи значения
-//        dict.put("key1", "new value");
-//        assertEquals("new value", dict.get("key1"), "Значение должно быть перезаписано");
-//
-//        // Удаление несуществующего ключа
-//        assertNull(dict.remove("nonexistent"), "Удаление несуществующего ключа должно возвращать null");
-//
-//        System.out.println("Тест 7 пройден успешно");
-//    }
-
     // Вспомогательные методы для утверждений
+
+    /**
+     * Проверяет, что условие истинно.
+     * @param condition проверяемое условие
+     * @param message сообщение об ошибке
+     * @throws AssertionError если условие ложно
+     */
     private static void assertTrue(boolean condition, String message) {
         if (!condition) {
             throw new AssertionError("Тест не пройден: " + message);
         }
     }
 
+    /**
+     * Проверяет, что условие ложно.
+     * @param condition проверяемое условие
+     * @param message сообщение об ошибке
+     * @throws AssertionError если условие истинно
+     */
     private static void assertFalse(boolean condition, String message) {
         assertTrue(!condition, message);
     }
 
+    /**
+     * Проверяет равенство ожидаемого и фактического значений.
+     * @param expected ожидаемое значение
+     * @param actual фактическое значение
+     * @param message сообщение об ошибке
+     * @throws AssertionError если значения не равны
+     */
     private static void assertEquals(Object expected, Object actual, String message) {
         if (expected == null ? actual != null : !expected.equals(actual)) {
             throw new AssertionError(String.format(
@@ -140,12 +154,24 @@ public class DictionaryTests {
         }
     }
 
+    /**
+     * Проверяет, что объект равен null.
+     * @param object проверяемый объект
+     * @param message сообщение об ошибке
+     * @throws AssertionError если объект не null
+     */
     private static void assertNull(Object object, String message) {
         if (object != null) {
             throw new AssertionError("Тест не пройден: " + message);
         }
     }
 
+    /**
+     * Проверяет, что объект не равен null.
+     * @param object проверяемый объект
+     * @param message сообщение об ошибке
+     * @throws AssertionError если объект null
+     */
     private static void assertNotNull(Object object, String message) {
         if (object == null) {
             throw new AssertionError("Тест не пройден: " + message);

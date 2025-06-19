@@ -13,6 +13,13 @@ public class AVLTests {
         System.out.println("Все тесты пройдены успешно!");
     }
 
+    /**
+     * Тестирует базовые операции вставки и поиска элементов.
+     * Проверяет:
+     * 1. Корректность добавления элементов
+     * 2. Корректность поиска существующих элементов
+     * 3. Отсутствие ложных срабатываний при поиске
+     */
     private static void testInsertAndContains() {
         System.out.println("\nТест 1: Вставка и поиск элементов");
         AVLTree<Integer> tree = new AVLTree<>();
@@ -28,6 +35,13 @@ public class AVLTests {
         System.out.println("Тест 1 пройден успешно");
     }
 
+    /**
+     * Тестирует операцию удаления элементов.
+     * Проверяет:
+     * 1. Корректность удаления элемента
+     * 2. Сохранение других элементов после удаления
+     * 3. Отсутствие удаленного элемента в дереве
+     */
     private static void testDelete() {
         System.out.println("\nТест 2: Удаление элементов");
         AVLTree<Integer> tree = new AVLTree<>();
@@ -43,6 +57,11 @@ public class AVLTests {
         System.out.println("Тест 2 пройден успешно");
     }
 
+    /**
+     * Тестирует корректность in-order обхода дерева.
+     * Проверяет порядок вывода элементов (должен быть отсортированным).
+     * Требует визуальной проверки вывода в консоли.
+     */
     private static void testInOrderTraversal() {
         System.out.println("\nТест 3: In-order обход");
         AVLTree<Integer> tree = new AVLTree<>();
@@ -59,6 +78,10 @@ public class AVLTests {
         System.out.println("Тест 3 пройден успешно (проверьте вывод вручную)");
     }
 
+    /**
+     * Тестирует автоматическую балансировку после вставки элементов.
+     * Проверяет корректность работы поворотов при добавлении элементов.
+     */
     private static void testBalanceAfterInsert() {
         System.out.println("\nТест 4: Балансировка после вставки");
         AVLTree<Integer> tree = new AVLTree<>();
@@ -74,6 +97,10 @@ public class AVLTests {
         System.out.println("Тест 4 пройден успешно");
     }
 
+    /**
+     * Тестирует автоматическую балансировку после удаления элементов.
+     * Проверяет корректность работы поворотов при удалении элементов.
+     */
     private static void testBalanceAfterDelete() {
         System.out.println("\nТест 5: Балансировка после удаления");
         AVLTree<Integer> tree = new AVLTree<>();
@@ -93,6 +120,13 @@ public class AVLTests {
         System.out.println("Тест 5 пройден успешно");
     }
 
+    /**
+     * Тестирует корректность вычисления высоты дерева.
+     * Проверяет высоту:
+     * 1. Пустого дерева
+     * 2. Дерева с одним элементом
+     * 3. Сбалансированного дерева
+     */
     private static void testHeight() {
         System.out.println("\nТест 6: Высота дерева");
         AVLTree<Integer> tree = new AVLTree<>();
@@ -112,6 +146,13 @@ public class AVLTests {
         System.out.println("Тест 6 пройден успешно");
     }
 
+    /**
+     * Тестирует поведение пустого дерева.
+     * Проверяет:
+     * 1. Поиск в пустом дереве
+     * 2. Высоту пустого дерева
+     * 3. Удаление из пустого дерева (не должно вызывать ошибок)
+     */
     private static void testEmptyTree() {
         System.out.println("\nТест 7: Пустое дерево");
         AVLTree<Integer> tree = new AVLTree<>();
@@ -125,17 +166,35 @@ public class AVLTests {
         System.out.println("Тест 7 пройден успешно");
     }
 
-    // Вспомогательные методы для утверждений
+    /**
+     * Проверяет, что условие истинно.
+     * @param condition проверяемое условие
+     * @param message сообщение об ошибке при ложном условии
+     * @throws AssertionError если условие ложно
+     */
     private static void assertTrue(boolean condition, String message) {
         if (!condition) {
             throw new AssertionError("Тест не пройден: " + message);
         }
     }
 
+    /**
+     * Проверяет, что условие ложно.
+     * @param condition проверяемое условие
+     * @param message сообщение об ошибке при истинном условии
+     * @throws AssertionError если условие истинно
+     */
     private static void assertFalse(boolean condition, String message) {
         assertTrue(!condition, message);
     }
 
+    /**
+     * Проверяет равенство ожидаемого и фактического значений.
+     * @param expected ожидаемое значение
+     * @param actual фактическое значение
+     * @param message сообщение об ошибке при несовпадении
+     * @throws AssertionError если значения не равны
+     */
     private static void assertEquals(int expected, int actual, String message) {
         if (expected != actual) {
             throw new AssertionError(String.format(
