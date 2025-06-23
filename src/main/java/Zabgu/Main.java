@@ -19,78 +19,90 @@ public class Main {
             case 1:{
                 System.out.println("1) Деревья. Бинарные деревья поиска.");
 
-                // Вывод обычного дерева
-                System.out.println("Бинарное дерево:");
+                // 1. Ручное создание узлов дерева, вывод дерева.
+                System.out.println("\nБинарное дерево:");
                 TreeNode<Integer> root = new TreeNode<>(1);
                 root.left = new TreeNode<>(2);
                 root.right = new TreeNode<>(3);
                 root.left.left = new TreeNode<>(4);
                 root.left.right = new TreeNode<>(5);
 
-                root.printTree();
-                // 1. Создаем дерево с 5 узлами
+                BinSTree.printTree(root);
+
+                // 2. Рекурсивный обход дерева методами LNR и RNL
+                System.out.println("\nРекурсивный обход дерева методами LNR и RNL: ");
+                System.out.println("LNR: " + BinSTree.traverseLNR(root));
+                System.out.println("RNL: " + BinSTree.traverseRNL(root));
+
+                // 3. Создание бинарного дерева поиска, через метод Insert и вывод дерева.
+                System.out.println("\nБинарное дерево поиска, созданное через Insert: ");
                 BinSTree<Integer> tree = new BinSTree<>();
                 tree.insert(5);
                 tree.insert(3);
                 tree.insert(7);
                 tree.insert(2);
                 tree.insert(4);
-
-                // 2. Изображаем дерево
-                System.out.println("Бинарное дерево поиска:");
-                tree.printTree();
-
-                // 3. Рекурсивные обходы дерева
-                System.out.println("\nОбход LNR:");
-                List<Integer> lnr = tree.traverseLNR();
-                System.out.println(lnr);
-
-                System.out.println("\nОбход RNL:");
-                List<Integer> rnl = tree.traverseRNL();
-                System.out.println(rnl);
-
-                // 4. Вставка нового узла
-                System.out.println("\nВставляем 6:");
                 tree.insert(6);
+                tree.insert(8);
+                tree.insert(11);
+                tree.insert(15);
+                tree.insert(10);
                 tree.printTree();
 
-                // 5. Поиск узла в дереве
-                System.out.println("Дерево содержит 4? " + tree.contains(4));
-                System.out.println("Дерево содержит 10? " + tree.contains(10));
+                // 4. Поиск узла в деревьях
+                System.out.println("\nПоиск узла в бинарных деревьях: ");
+                System.out.println("Бинарное дерево, искомый узел 10: " + BinSTree.find(root,10));
+                System.out.println("Бинарное дерево поиска, искомый узел 8: " + tree.find(8).value);
 
-                // 6. Глубина дерева
-                System.out.println("Глубина дерева: " + tree.depth());
+                // 5. Глубина дерева
+                System.out.println("\nГлубина дерева: ");
+                System.out.println("Бинарное дерево: " + BinSTree.depth(root));
+                System.out.println("Бинарное дерево поиска: " + tree.depth());
 
-                // 7. Количество узлов в дереве
-                System.out.println("Количество узлов: " + tree.size());
+                // 6. Количество узлов в дереве
+                System.out.println("\nКоличество узлов в дереве: ");
+                System.out.println("Бинарное дерево: " + BinSTree.size(root));
+                System.out.println("Бинарное дерево поиска: " + tree.size());
 
-                // 8. Удаление узла
-                System.out.println("\nУдаляем 3:");
-                tree.remove(3);
+                // 7. Удаление узла в дереве
+                System.out.println("\nУдаление узла в дереве 11.");
+                tree.remove(11);
                 tree.printTree();
 
-                // 9. Глубокое копирование
+                // 8. Глубокое копирование дерева
+                System.out.println("\nГлубокое копирование дерева.");
                 BinSTree<Integer> copy = tree.deepCopy();
-                System.out.println("\nКопия дерева:");
                 copy.printTree();
 
-                // 10. Итератор для дерева
-                System.out.println("Обход дерева с использованием итератора: ");
-                Iterator<Integer> it = new BSTInOrderIterator<>(tree.getRoot());
-                while (it.hasNext()){
-                    System.out.print(it.next() + " ");
-                }
-
-                // 11. Очистка дерева
+                // Очистка всего дерева
+                System.out.println("\nОчистка всего дерева");
                 tree.clear();
-                System.out.println("\nПосле очистки, размер: " + tree.size());
+                System.out.println("Бинарное дерево поиска, количество узлов: " + tree.size());
 
-                // 12. Время поиска для "бинарного дерева поиска"
-                BSTPerformanceTest.testSearchPerformance();
 
-                // 13. Тесты
 
-                BinSTreeTest.testSearchPerformance();
+//                // 9. Глубокое копирование
+//                BinSTree<Integer> copy = tree.deepCopy();
+//                System.out.println("\nКопия дерева:");
+//                copy.printTree();
+//
+//                // 10. Итератор для дерева
+//                System.out.println("Обход дерева с использованием итератора: ");
+//                Iterator<Integer> it = new BSTInOrderIterator<>(tree.getRoot());
+//                while (it.hasNext()){
+//                    System.out.print(it.next() + " ");
+//                }
+//
+//                // 11. Очистка дерева
+//                tree.clear();
+//                System.out.println("\nПосле очистки, размер: " + tree.size());
+//
+//                // 12. Время поиска для "бинарного дерева поиска"
+//                BSTPerformanceTest.testSearchPerformance();
+//
+//                // 13. Тесты
+//
+//                BinSTreeTest.testSearchPerformance();
 
                 break;
             }

@@ -4,200 +4,145 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Класс реализующий бинарное дерево поиска (Binary Search Tree).
- * Поддерживает основные операции: вставка, удаление, поиск, обходы дерева.
- *
+ * Класс бинарного дерева поиска.
  * @param <T> тип элементов дерева.
  */
 public class BinSTree<T extends Comparable<T>> {
     private TreeNode<T> root;
 
     /**
-     * Конструктор по умолчанию. Создает пустое дерево.
+     * Конструктор по умолчанию, создает пустое дерево.
      */
     public BinSTree() {
         this.root = null;
     }
 
-    /**
-     * Выполняет обход дерева (LNR).
-     *
-     * @return список элементов в порядке LNR
-     */
-    public List<T> traverseLNR() {
-        List<T> result = new ArrayList<>();
-        traverseLNRRec(root, result);
-        return result;
-    }
+/////////////////////////////////////////////////---Вывод дерева---/////////////////////////////////////////////////////
 
-    private void traverseLNRRec(TreeNode<T> node, List<T> result) {
-        if (node != null) {
-            traverseLNRRec(node.left, result);
-            result.add(node.value);
-            traverseLNRRec(node.right, result);
-        }
-    }
-
-    /**
-     * Выполняет обратный симметричный обход дерева (RNL).
-     *
-     * @return список элементов в порядке RNL
-     */
-    public List<T> traverseRNL() {
-        List<T> result = new ArrayList<>();
-        traverseRNLRec(root, result);
-        return result;
-    }
-
-    private void traverseRNLRec(TreeNode<T> node, List<T> result) {
-        if (node != null) {
-            traverseRNLRec(node.right, result);
-            result.add(node.value);
-            traverseRNLRec(node.left, result);
-        }
-    }
-
-    /**
-     * Вставляет новый элемент в дерево.
-     *
-     * @param value значение для вставки
-     */
-    public void insert(T value) {
-        root = insertRec(root, value);
-    }
-
-    private TreeNode<T> insertRec(TreeNode<T> node, T value) {
-        if (node == null) {
-            return new TreeNode<>(value);
-        }
-
-        if (value.compareTo(node.value) < 0) {
-            node.left = insertRec(node.left, value);
-        } else if (value.compareTo(node.value) > 0) {
-            node.right = insertRec(node.right, value);
-        }
-
-        return node;
-    }
-
-//    /**
-//     * Поиск элемента в дереве.
-//     *
-//     * @param value искомое значение
-//     * @return true если элемент найден, false в противном случае
-//     */
-//    public boolean contains(T value) {
-//        return containsRec(root, value);
-//    }
-//
-//    private boolean containsRec(TreeNode<T> node, T value) {
-//        if (node == null) return false;
-//
-//        int cmp = value.compareTo(node.value);
-//        if (cmp < 0) return containsRec(node.left, value);
-//        if (cmp > 0) return containsRec(node.right, value);
-//
-//        return true;
-//    }
-
-    /**
-     * Поиск элемента в дереве.
-     *
-     * @param value искомое значение
-     * @return ссылка на узел с искомым значением, или null если элемент не найден
-     */
-    public boolean contains(T value) {
-        return find(value) != null;
-    }
-
-    public TreeNode<T> find(T value) {
-        return findRec(root, value);
-    }
-
-
-    private TreeNode<T> findRec(TreeNode<T> node, T value) {
-        if (node == null) return null;
-
-        int cmp = value.compareTo(node.value);
-        if (cmp < 0) return findRec(node.left, value);
-        if (cmp > 0) return findRec(node.right, value);
-
-        return node;
-    }
-
-    /**
-     * Очищает дерево, удаляя все элементы.
-     */
-    public void clear() {
-        root = null;
-    }
-
-    /**
-     * Вычисляет глубину дерева.
-     *
-     * @return глубина дерева (0 для пустого дерева)
-     */
-    public int depth() {
-        return depthRec(root);
-    }
-
-    private int depthRec(TreeNode<T> node) {
-        if (node == null) return 0;
-        return 1 + Math.max(depthRec(node.left), depthRec(node.right));
-    }
-
-    /**
-     * Возвращает количество узлов в дереве.
-     * Вычисляется рекурсивно при каждом вызове.
-     *
-     * @return количество узлов в дереве
-     */
-    public int size() {
-        return sizeRec(root);
-    }
-
-    /**
-     * Вспомогательный рекурсивный метод для подсчета узлов.
-     *
-     * @param node текущий узел для подсчета
-     * @return количество узлов в поддереве
-     */
-    private int sizeRec(TreeNode<T> node) {
-        if (node == null) {
-            return 0;
-        }
-        return 1 + sizeRec(node.left) + sizeRec(node.right);
-    }
-
-    /**
-     * Выводит дерево в удобочитаемом виде в консоль. Строит визуальное дерево.
-     */
     public void printTree() {
-        printTreeRec(root, 0, new StringBuilder());
+        printTree(this.root);
     }
 
-    private void printTreeRec(TreeNode<T> node, int level, StringBuilder prefix) {
+    public static <T> void printTree(TreeNode<T> node) {
+        printTreeRec(node, 0, new StringBuilder());
+    }
+
+    private static <T> void printTreeRec(TreeNode<T> node, int level, StringBuilder prefix) {
         if (node == null) return;
 
         printTreeRec(node.right, level + 1, new StringBuilder(prefix).append("   "));
 
-        if(level == 0){
+        if (level == 0) {
             System.out.println(" " + node.value);
-        }else {
+        } else {
             System.out.println(prefix + " |---" + node.value);
         }
+
         printTreeRec(node.left, level + 1, new StringBuilder(prefix).append("   "));
     }
 
-    /**
-     *  Дополнительные методы
-     */
+/////////////////////////////////////////////////---Обход LNR---/////////////////////////////////////////////////////
 
-    /**
-     * Удаляет элемент из дерева.
-     *
-     * @param value значение для удаления
-     */
+    public List<T> traverseLNR() {
+        return traverseLNR(root);
+    }
+
+    public static <T> List<T> traverseLNR(TreeNode<T> node) {
+        List<T> result = new ArrayList<>();
+        traverseLNR(node, result);
+        return result;
+    }
+
+    private static <T> void traverseLNR(TreeNode<T> node, List<T> result) {
+        if (node != null) {
+            traverseLNR(node.left, result);
+            result.add(node.value);
+            traverseLNR(node.right, result);
+        }
+    }
+
+/////////////////////////////////////////////////---Обход RNL---/////////////////////////////////////////////////////
+
+    public List<T> traverseRNL() {
+        return traverseRNL(root);
+    }
+
+    public static <T> List<T> traverseRNL(TreeNode<T> node) {
+        List<T> result = new ArrayList<>();
+        traverseRNL(node, result);
+        return result;
+    }
+
+    private static <T> void traverseRNL(TreeNode<T> node, List<T> result) {
+        if (node != null) {
+            traverseLNR(node.right, result);
+            result.add(node.value);
+            traverseLNR(node.left, result);
+        }
+    }
+
+/////////////////////////////////////////////////---Метод вставки---/////////////////////////////////////////////////////
+
+    public void insert(T value) {
+        root = insert(root, value);
+    }
+
+    public static <T extends Comparable<T>> TreeNode<T> insert(TreeNode<T> node, T value) {
+        if (node == null) return new TreeNode<>(value);
+
+        if (value.compareTo(node.value) < 0) {
+            node.left = insert(node.left, value);
+        } else if (value.compareTo(node.value) > 0) {
+            node.right = insert(node.right, value);
+        }
+        return node;
+    }
+
+/////////////////////////////////////////////////---Метод поиска---/////////////////////////////////////////////////////
+
+    public TreeNode<T> find(T value) {
+        return find(root, value);
+    }
+
+    public static <T extends Comparable<T>> TreeNode<T> find(TreeNode<T> node, T value) {
+        if (node == null) return null;
+        int cmp = value.compareTo(node.value);
+        if (cmp < 0) return find(node.left, value);
+        if (cmp > 0) return find(node.right, value);
+        return node;
+    }
+
+////////////////////////////////////////////---Метод очистки дерева---////////////////////////////////////////////////
+
+    public void clear() {
+        root = null;
+    }
+
+////////////////////////////////////////////---Метод глубины дерева---////////////////////////////////////////////////
+
+    public int depth() {
+        return depth(root);
+    }
+
+    public static <T> int depth(TreeNode<T> node) {
+        if (node == null) return 0;
+        return 1 + Math.max(depth(node.left), depth(node.right));
+    }
+
+///////////////////////////////////////---Метод количество узлов в дереве---///////////////////////////////////////////
+
+    public int size() {
+        return size(root);
+    }
+
+    public static <T> int size(TreeNode<T> node) {
+        if (node == null) return 0;
+        return 1 + size(node.left) + size(node.right);
+    }
+
+///////////////////////////////////////////---Дополнительные методы---///////////////////////////////////////////
+///////////////////////////////////////////---Метод удаления узла---/////////////////////////////////////////////
+
     public void remove(T value) {
         root = removeRec(root, value);
     }
@@ -211,34 +156,24 @@ public class BinSTree<T extends Comparable<T>> {
         } else if (cmp > 0) {
             node.right = removeRec(node.right, value);
         } else {
-
-            // Узел с одним потомком или без потомков
             if (node.left == null) return node.right;
             if (node.right == null) return node.left;
 
-            // Узел с двумя потомками
-            node.value = minValue(node.right);
-
+            node.value = minValue(node.right).value;
             node.right = removeRec(node.right, node.value);
         }
 
         return node;
     }
 
-    private T minValue(TreeNode<T> node) {
-        T min = node.value;
-        while (node.left != null) {
-            min = node.left.value;
+    private TreeNode<T> minValue(TreeNode<T> node) {
+        while (node.left != null){
             node = node.left;
         }
-        return min;
+        return node;
     }
+///////////////////////////////////////---Метод глубокого копирования---///////////////////////////////////////////
 
-    /**
-     * Создает глубокую копию дерева.
-     *
-     * @return новая независимая копия дерева
-     */
     public BinSTree<T> deepCopy() {
         BinSTree<T> copy = new BinSTree<>();
         copy.root = deepCopyRec(root);
@@ -255,8 +190,10 @@ public class BinSTree<T extends Comparable<T>> {
         return newNode;
     }
 
-    // Возвращает корневой узел дерева (Итератор)
+/////////////////////////////////////////////////---Метод для Итератора---/////////////////////////////////////////////////////
+
     public TreeNode<T> getRoot(){
         return this.root;
     }
+
 }
