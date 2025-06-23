@@ -23,4 +23,28 @@ public class TreeNode<T> {
         this.left = null;
         this.right = null;
     }
+
+    public void printTree() {
+        printTreeRec(this, 0, new StringBuilder());
+    }
+
+    private void printTreeRec(TreeNode<T> node, int level, StringBuilder prefix) {
+        if (node == null) {
+            return;
+        }
+
+        // Сначала правый потомок (верхняя часть вывода)
+        printTreeRec(node.right, level + 1, new StringBuilder(prefix).append("    "));
+
+        // Вывод текущего узла
+        if (level == 0) {
+            System.out.println(node.value);
+        } else {
+            System.out.println(prefix + "|---" + node.value);
+        }
+
+        // Затем левый потомок (нижняя часть вывода)
+        printTreeRec(node.left, level + 1, new StringBuilder(prefix).append("    "));
+    }
+
 }

@@ -11,7 +11,7 @@ import java.util.function.Function;
  */
 class HashTable<K, V> {
     private LinkedList<Entry<K, V>>[] table;    // Массив связных списков для хранения элементов
-    private Function<K, Integer> hashFunction;  // Функция для вычисления хеша ключа
+    private Function<K, Integer> hashFunction;  // Функция для вычисления хеша ключа (Хэш функция)
     private int size;
 
     /**

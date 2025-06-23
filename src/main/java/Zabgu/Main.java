@@ -1,5 +1,6 @@
 package Zabgu;
 
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
@@ -18,6 +19,15 @@ public class Main {
             case 1:{
                 System.out.println("1) Деревья. Бинарные деревья поиска.");
 
+                // Вывод обычного дерева
+                System.out.println("Бинарное дерево:");
+                TreeNode<Integer> root = new TreeNode<>(1);
+                root.left = new TreeNode<>(2);
+                root.right = new TreeNode<>(3);
+                root.left.left = new TreeNode<>(4);
+                root.left.right = new TreeNode<>(5);
+
+                root.printTree();
                 // 1. Создаем дерево с 5 узлами
                 BinSTree<Integer> tree = new BinSTree<>();
                 tree.insert(5);
@@ -77,6 +87,10 @@ public class Main {
 
                 // 12. Время поиска для "бинарного дерева поиска"
                 BSTPerformanceTest.testSearchPerformance();
+
+                // 13. Тесты
+
+                BinSTreeTest.testSearchPerformance();
 
                 break;
             }
@@ -234,6 +248,41 @@ public class Main {
                 DictionaryTests.runAllTests();
 
                 break;
+            }
+            case 5:{
+
+                System.out.println("Задание для Экзамена.");
+
+                // Создаем массив из 100 случайных чисел
+                int[] array = new int[100];
+                for (int i = 0; i < array.length; i++) {
+                    array[i] = (int)(Math.random() * 1000);
+                }
+
+                System.out.println("Исходный массив:");
+                System.out.println(Arrays.toString(array));
+
+                // Сортируем массив
+                SelectionSortAndBinarySearch.selectionSort(array);
+
+                System.out.println("\nОтсортированный массив:");
+                System.out.println(Arrays.toString(array));
+
+                // Вводим число
+                System.out.print("\nВведите элемент для поиска: ");
+                int target = scanner.nextInt();
+                scanner.close();
+
+                // Выполняем бинарный поиск
+                int result = SelectionSortAndBinarySearch.binarySearch(array, target);
+
+                // Выводим результат
+                if (result == -1) {
+                    System.out.println("Элемент не найден в массиве.");
+                } else {
+                    System.out.println("Элемент найден по индексу: " + result);
+                }
+
             }
             default:
                 System.out.println("Выбрано некорректное задание.");

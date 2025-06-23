@@ -80,24 +80,49 @@ public class BinSTree<T extends Comparable<T>> {
         return node;
     }
 
+//    /**
+//     * Поиск элемента в дереве.
+//     *
+//     * @param value искомое значение
+//     * @return true если элемент найден, false в противном случае
+//     */
+//    public boolean contains(T value) {
+//        return containsRec(root, value);
+//    }
+//
+//    private boolean containsRec(TreeNode<T> node, T value) {
+//        if (node == null) return false;
+//
+//        int cmp = value.compareTo(node.value);
+//        if (cmp < 0) return containsRec(node.left, value);
+//        if (cmp > 0) return containsRec(node.right, value);
+//
+//        return true;
+//    }
+
     /**
      * Поиск элемента в дереве.
      *
      * @param value искомое значение
-     * @return true если элемент найден, false в противном случае
+     * @return ссылка на узел с искомым значением, или null если элемент не найден
      */
     public boolean contains(T value) {
-        return containsRec(root, value);
+        return find(value) != null;
     }
 
-    private boolean containsRec(TreeNode<T> node, T value) {
-        if (node == null) return false;
+    public TreeNode<T> find(T value) {
+        return findRec(root, value);
+    }
+
+
+    private TreeNode<T> findRec(TreeNode<T> node, T value) {
+        if (node == null) return null;
 
         int cmp = value.compareTo(node.value);
-        if (cmp < 0) return containsRec(node.left, value);
-        if (cmp > 0) return containsRec(node.right, value);
+        if (cmp < 0) return findRec(node.left, value);
+        if (cmp > 0) return findRec(node.right, value);
 
-        return true;
+        return node;
     }
 
     /**
