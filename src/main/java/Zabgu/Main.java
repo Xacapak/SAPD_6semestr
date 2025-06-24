@@ -2,7 +2,6 @@ package Zabgu;
 
 import java.util.Arrays;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -70,39 +69,36 @@ public class Main {
                 tree.printTree();
 
                 // 8. Глубокое копирование дерева
-                System.out.println("\nГлубокое копирование дерева.");
-                BinSTree<Integer> copy = tree.deepCopy();
-                copy.printTree();
+                System.out.println("\nГлубокое копирование дерева:");
+                try {
+                    BinSTree<Integer> copy = tree.deepCopy();
+                    System.out.println("Скопированное дерево:");
+                    copy.printTree();
+                } catch (Exception e) {
+                    System.err.println("Ошибка при копировании дерева: " + e.getMessage());
+                    e.printStackTrace();
+                }
 
-                // Очистка всего дерева
-                System.out.println("\nОчистка всего дерева");
+                // 9. Использование Итератора
+                System.out.println("\nИспользование Итератора, вывод методом LNR: ");
+                for (Integer value : tree) {
+                    System.out.print(value + " ");
+                }
+
+                // 10. Очистка всего дерева
+                System.out.println("\n\nОчистка всего дерева");
                 tree.clear();
                 System.out.println("Бинарное дерево поиска, количество узлов: " + tree.size());
 
+                // 11. Эффективность тестирования при поиске
+                BinSTreePerformanceTest.testSearchPerformance();
 
+                // 12. Создаем график (передаем только время)
+                int[] testTimes = {5, 5, 9, 16, 35};
+                BinSTreePerformanceChart.createChart(testTimes);
 
-//                // 9. Глубокое копирование
-//                BinSTree<Integer> copy = tree.deepCopy();
-//                System.out.println("\nКопия дерева:");
-//                copy.printTree();
-//
-//                // 10. Итератор для дерева
-//                System.out.println("Обход дерева с использованием итератора: ");
-//                Iterator<Integer> it = new BSTInOrderIterator<>(tree.getRoot());
-//                while (it.hasNext()){
-//                    System.out.print(it.next() + " ");
-//                }
-//
-//                // 11. Очистка дерева
-//                tree.clear();
-//                System.out.println("\nПосле очистки, размер: " + tree.size());
-//
-//                // 12. Время поиска для "бинарного дерева поиска"
-//                BSTPerformanceTest.testSearchPerformance();
-//
-//                // 13. Тесты
-//
-//                BinSTreeTest.testSearchPerformance();
+                // 13. Тесты
+                BinSTreeTests.BinSTreeShow();
 
                 break;
             }
@@ -196,7 +192,7 @@ public class Main {
 
                 // Использование итератора
                 System.out.println("\nИтерация по элементам:");
-                Iterator<Integer> iterator = new BSTInOrderIterator<>(avlTree.getRoot());
+                Iterator<Integer> iterator = new BinSTreeIterator<>(avlTree.getRoot());
                 while (iterator.hasNext()) {
                     System.out.print(iterator.next() + " ");
                 }

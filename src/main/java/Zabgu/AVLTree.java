@@ -60,7 +60,7 @@ class AVLTree<T extends Comparable<T>> implements Iterable<T> {
      */
     @Override
     public Iterator<T> iterator() {
-        return new BSTInOrderIterator<>(getRoot());
+        return new BinSTreeIterator<>(getRoot());
     }
 
     /**

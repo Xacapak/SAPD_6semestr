@@ -2,12 +2,13 @@ package Zabgu;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Iterator;
 
 /**
  * Класс бинарного дерева поиска.
  * @param <T> тип элементов дерева.
  */
-public class BinSTree<T extends Comparable<T>> {
+public class BinSTree<T extends Comparable<T>> implements Iterable<T> {
     private TreeNode<T> root;
 
     /**
@@ -87,15 +88,26 @@ public class BinSTree<T extends Comparable<T>> {
         root = insert(root, value);
     }
 
-    public static <T extends Comparable<T>> TreeNode<T> insert(TreeNode<T> node, T value) {
-        if (node == null) return new TreeNode<>(value);
+    public static <T extends Comparable<T>> TreeNode<T> insert(TreeNode<T> root, T value) {
+        TreeNode<T> newNode = new TreeNode<>(value);
+        if (root == null) return newNode;
 
-        if (value.compareTo(node.value) < 0) {
-            node.left = insert(node.left, value);
-        } else if (value.compareTo(node.value) > 0) {
-            node.right = insert(node.right, value);
+        TreeNode<T> current = root;
+        TreeNode<T> parent = null;
+
+        while (current != null) {
+            parent = current;
+            int cmp = value.compareTo(current.value);
+            if (cmp < 0) current = current.left;
+            else if (cmp > 0) current = current.right;
+            else return root;
         }
-        return node;
+
+        int cmp = value.compareTo(parent.value);
+        if (cmp < 0) parent.left = newNode;
+        else parent.right = newNode;
+
+        return root;
     }
 
 /////////////////////////////////////////////////---Метод поиска---/////////////////////////////////////////////////////
@@ -105,11 +117,13 @@ public class BinSTree<T extends Comparable<T>> {
     }
 
     public static <T extends Comparable<T>> TreeNode<T> find(TreeNode<T> node, T value) {
-        if (node == null) return null;
-        int cmp = value.compareTo(node.value);
-        if (cmp < 0) return find(node.left, value);
-        if (cmp > 0) return find(node.right, value);
-        return node;
+        while (node != null) {
+            int cmp = value.compareTo(node.value);
+            if (cmp < 0) node = node.left;
+            else if (cmp > 0) node = node.right;
+            else return node;
+        }
+        return null;
     }
 
 ////////////////////////////////////////////---Метод очистки дерева---////////////////////////////////////////////////
@@ -192,8 +206,9 @@ public class BinSTree<T extends Comparable<T>> {
 
 /////////////////////////////////////////////////---Метод для Итератора---/////////////////////////////////////////////////////
 
-    public TreeNode<T> getRoot(){
-        return this.root;
+    @Override
+    public Iterator<T> iterator() {
+        return new BinSTreeIterator<>(root);
     }
 
 }
