@@ -3,6 +3,7 @@ package Zabgu;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Scanner;
+import java.util.function.Function;
 
 public class Main {
     public static void main(String[] args) throws InterruptedException{
@@ -93,11 +94,7 @@ public class Main {
                 // 11. Эффективность тестирования при поиске
                 BinSTreePerformanceTest.testSearchPerformance();
 
-                // 12. Создаем график (передаем только время)
-                int[] testTimes = {5, 5, 9, 16, 35};
-                BinSTreePerformanceChart.createChart(testTimes);
-
-                // 13. Тесты
+                // 12. Тесты
                 BinSTreeTests.BinSTreeShow();
 
                 break;
@@ -105,50 +102,48 @@ public class Main {
             case 2:{
                 System.out.println("2) Хеш-таблица.");
 
-                // Создаем хеш-таблицу с целочисленными ключами и строковыми значениями
-                // Используем простую хеш-функцию (остаток от деления)
-                HashTable<Integer, String> table = new HashTable<>(10, key -> key % 10);
+                Function<Integer, Integer> HashFunction = key -> key * 31;
+                HashTable<Integer> Table = new HashTable<>(10, HashFunction);
 
-                // Вставка элементов
-                table.put(1, "Apple");
-                table.put(2, "Banana");
-                table.put(11, "Orange"); // Коллизия с ключом 1
-                table.put(12, "Grape");  // Коллизия с ключом 2
-                table.put(21, "Mango");  // Коллизия с ключом 1
+                // 1. Добавление значений в таблицу
+                System.out.println("Добавляем в таблицу значения '5', '15', '25'");
+                Table.insert(new DataItem<>(5));
+                Table.insert(new DataItem<>(15));
+                Table.insert(new DataItem<>(25));
 
-                // Вывод размера таблицы
-                System.out.println("Размер таблицы: " + table.size());
+                System.out.println("После добавления:");
+                Table.displayTable();
+                System.out.println("Размер таблицы: " + Table.tableSize());
 
-                // Поиск элементов
-                System.out.println("Поиск ключа 1: " + table.get(1));
-                System.out.println("Поиск ключа 11: " + table.get(11));
-                System.out.println("Поиск ключа 21: " + table.get(21));
-                System.out.println("Поиск несуществующего ключа 3: " + table.get(3));
+                // 2. Поиск значения в таблице
+                System.out.println("Поиск 15: " + (Table.find(15) != null ? "Найден" : "Не найден"));
 
-                // Удаление элемента
-                System.out.println("\nУдаление ключа 11...");
-                table.remove(11);
-                System.out.println("Поиск ключа 11 после удаления: " + table.get(11));
-                System.out.println("Размер таблицы после удаления: " + table.size());
+                // 3. Поиск значения в таблице
+                System.out.println("\nУдаление значения 15:");
+                Table.delete(15);
+                Table.displayTable();
 
-                // Использование итератора
-                System.out.println("\nИтерация по элементам таблицы:");
-                Iterator<HashTable.Entry<Integer, String>> iterator = new HashTableIterator<>(table);
-                while (iterator.hasNext()) {
-                    HashTable.Entry<Integer, String> entry = iterator.next();
-                    System.out.println("Ключ: " + entry.key + ", Значение: " + entry.value);
+                // 4. Очистка таблицы
+                System.out.println("Очистка таблицы:");
+                Table.clear();
+                Table.displayTable();
+                System.out.println("Размер таблицы: " + Table.tableSize());
+
+                // 5. Использование Итератора
+                Table.insert(new DataItem<>(5));
+                Table.insert(new DataItem<>(15));
+                Table.insert(new DataItem<>(25));
+
+                System.out.println("\nЭлементы таблицы:");
+                for (DataItem<Integer> item : Table) {
+                    System.out.print(item.getKey() + " ");
                 }
 
-                // Очистка таблицы
-                System.out.println("\nОчистка таблицы...");
-                table.clear();
-                System.out.println("Размер таблицы после очистки: " + table.size());
-
-                // Оценка среднего времени поиска
+                // 5. Эффективность тестирования при поиске
                 HashTablePerformanceTest.testSearchPerformance();
 
-                // Тесты
-                HashTableTests.runAllTests();
+                // 12. Тесты
+                HashTableTest.startTest();
 
                 break;
             }

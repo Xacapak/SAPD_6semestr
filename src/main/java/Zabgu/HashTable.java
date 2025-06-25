@@ -1,161 +1,115 @@
 package Zabgu;
 
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.function.Function;
 
-/**
- * Шаблонный класс хеш-таблицы с разрешением коллизий методом цепочек
- * @param <K> тип ключа
- * @param <V> тип значения
- */
-class HashTable<K, V> {
-    private LinkedList<Entry<K, V>>[] table;    // Массив связных списков для хранения элементов
-    private Function<K, Integer> hashFunction;  // Функция для вычисления хеша ключа (Хэш функция)
-    private int size;
+public class HashTable<T> implements Iterable<DataItem<T>> {
+    private DataItem<T>[] hashArray;
+    private int arraySize;
+    private DataItem<T> nonItem;
+    private Function<T, Integer> hashFunction;
 
-    /**
-     * Конструктор с заданием начальной емкости и хеш-функции
-     * @param capacity начальная емкость таблицы
-     * @param hashFunction хеш-функция
-     */
     @SuppressWarnings("unchecked")
-    public HashTable(int capacity, Function<K, Integer> hashFunction) {
-        this.table = new LinkedList[capacity];  // Инициализация массива заданной емкости
-        this.hashFunction = hashFunction;       // Установка функции хеширования
-        this.size = 0;
+    public HashTable(int size, Function<T, Integer> hashFunction){
+        this.arraySize = size;
+        this.hashArray = new DataItem[this.arraySize];
+        this.nonItem = new DataItem<>(null);
+        this.hashFunction = hashFunction;
     }
 
-    /**
-     * Вставка пары ключ-значение в таблицу
-     * @param key ключ
-     * @param value значение
-     */
-    public void put(K key, V value) {
-        if (key == null) {
-            throw new IllegalArgumentException("Ключ не может быть null");
-        }
-
-        int index = getIndex(key);                  // Вычисление индекса в массиве
-        if (table[index] == null) {
-            table[index] = new LinkedList<>();      // Создание нового списка, если корзина пуста
-        }
-
-        // Проверяем, есть ли уже такой ключ в цепочке
-        for (Entry<K, V> entry : table[index]) {
-            if (entry.key.equals(key)) {
-                entry.value = value; // Обновление значения, если ключ уже существует
-                return;
+    public void displayTable(){
+        System.out.println("Таблица:");
+        for (int i = 0; i < arraySize; i++) {
+            if (hashArray[i] != null && hashArray[i] != nonItem){
+                System.out.println("[" + i + "]: " + hashArray[i].getKey());
+            }else {
+                System.out.println("[" + i + "]: **");
             }
         }
-
-        // Если ключа не было, добавляем новую запись
-        table[index].add(new Entry<>(key, value));
-        size++;
+        System.out.println();
     }
 
-    /**
-     * Получение значения по ключу
-     * @param key ключ
-     * @return значение или null, если ключ не найден
-     */
-    public V get(K key) {
-        if (key == null) {
-            return null;
-        }
+    public DataItem<T> find(T key){
+        int hashVal = hashFunc(key);
+        int startIndex = hashVal;
 
-        int index = getIndex(key);      // Вычисление индекса
-        if (table[index] == null) {
-            return null;                // Возврат null, если корзина пуста
-        }
+        while (hashArray[hashVal] != null){
+            if (hashArray[hashVal] != nonItem && hashArray[hashVal].getKey().equals(key)){
+                return hashArray[hashVal];
+            }
+            hashVal = (hashVal + 1) % arraySize;
 
-        // Ищем ключ в цепочке
-        for (Entry<K, V> entry : table[index]) {
-            if (entry.key.equals(key)) {
-                return entry.value;     // Возврат значения, если ключ найден
+            if (hashVal == startIndex){
+                break;
             }
         }
-
-        return null;                    // Ключ не найден
+        return null;
     }
 
-    /**
-     * Удаление элемента по ключу
-     * @param key ключ
-     * @return удаленное значение или null, если ключ не найден
-     */
-    public V remove(K key) {
-        if (key == null) {
-            return null;
-        }
+    public void insert(DataItem<T> item){
+        T key = item.getKey();
+        int hashVal = hashFunc(key);
 
-        int index = getIndex(key);
-        if (table[index] == null) {
-            return null;                    // Корзина пуста - ничего удалять
+        while (hashArray[hashVal] != null && hashArray[hashVal] != nonItem){
+            hashVal = (hashVal + 1) % arraySize;
         }
+        hashArray[hashVal] = item;
+    }
 
-        // Ищем ключ в цепочке для удаления
-        Iterator<Entry<K, V>> iterator = table[index].iterator();
-        while (iterator.hasNext()) {
-            Entry<K, V> entry = iterator.next();
-            if (entry.key.equals(key)) {
-                V value = entry.value;
-                iterator.remove();          // Удаление элемента через итератор
-                size--;
-                return value;               // Возврат удаленного значения
+    public DataItem<T> delete(T key){
+        int hashVal = hashFunc(key);
+        int startIndex = hashVal;
+
+        while (hashArray[hashVal] != null){
+            if (hashArray[hashVal] != nonItem && hashArray[hashVal].getKey().equals(key)){
+                DataItem<T> temp = hashArray[hashVal];
+                hashArray[hashVal] = nonItem;
+                return temp;
+            }
+            hashVal = (hashVal + 1) % arraySize;
+
+            if (hashVal == startIndex){
+                break;
             }
         }
-
-        return null;                        // Элемент не найден
+        return null;
     }
 
-    /**
-     * Очистка таблицы
-     */
-    public void clear() {
-        for (int i = 0; i < table.length; i++) {
-            if (table[i] != null) {
-                table[i].clear();
+    public void clear(){
+        for (int i = 0; i < arraySize; i++) {
+            hashArray[i] = null;
+        }
+    }
+
+    public int tableSize(){
+        int count = 0;
+        for (int i = 0; i < arraySize; i++) {
+            if (hashArray[i] != null && hashArray[i] != nonItem) {
+                count++;
             }
         }
-        size = 0;
+        return count;
     }
 
-    /**
-     * Получение текущего размера таблицы
-     * @return количество элементов в таблице
-     */
-    public int size() {
-        return size;
+    private int hashFunc(T key){
+        return hashFunction.apply(key) % arraySize;
     }
 
-    /**
-     * Проверка таблицы на пустоту
-     * @return true, если таблица пуста
-     */
-    public boolean isEmpty() {
-        return size == 0;
+    @Override
+    public Iterator<DataItem<T>> iterator() {
+        return new HashTableIterator<>(this);
     }
 
-    // Вспомогательный метод для вычисления индекса в массиве
-    private int getIndex(K key) {
-        int hash = hashFunction.apply(key);         // Применение функции хеширования
-        return (hash & 0x7FFFFFFF) % table.length;  // Обеспечиваем неотрицательный индекс
+    public DataItem<T>[] getHashArray() {
+        return hashArray;
     }
 
-    // Внутренний класс для хранения пар ключ-значение
-    static class Entry<K, V> {
-        final K key;
-        V value;
-
-        Entry(K key, V value) {
-            this.key = key;
-            this.value = value;
-        }
+    public DataItem<T> getNonItem() {
+        return nonItem;
     }
 
-    public LinkedList<Entry<K, V>>[] getTable() {
-        return table;
+    public int getArraySize() {
+        return arraySize;
     }
 
 }

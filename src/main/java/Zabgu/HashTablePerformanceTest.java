@@ -1,36 +1,86 @@
 package Zabgu;
 
 import java.util.Random;
+import java.util.function.Function;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartFrame;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.xy.XYSeries;
+import org.jfree.data.xy.XYSeriesCollection;
 
-class HashTablePerformanceTest {
+public class HashTablePerformanceTest {
     public static void testSearchPerformance() {
         System.out.println("\nТестирование времени поиска в хеш-таблице:");
-        System.out.println("Размер | Время (мс)");
-        System.out.println("-------------------");
+        System.out.println("Размер  | Время (мс)");
+        System.out.println("--------------------");
 
-        int[] sizes = {100, 1000, 10000, 100000, 500000, 1000000};
-        double loadFactor = 0.75; // Фиксированный коэффициент заполнения
-        int searchIterations = 100000;
+        int[] sizes = {100, 1_000, 10_000, 100_000, 1_000_000};
+        int searchIterations = 100_000;
+        int[] times = new int[sizes.length];
+        Random rand = new Random();
 
-        for (int size : sizes) {
-            HashTable<Integer, String> table = new HashTable<>(size, k -> k % size);
+        Function<Integer, Integer> hashFunction = key -> {
+            key = ((key >> 16) ^ key) * 0x45d9f3b;
+            key = ((key >> 16) ^ key) * 0x45d9f3b;
+            return (key >> 16) ^ key;
+        };
 
-            // Заполняем таблицу
-            Random random = new Random();
-            int elementsToAdd = (int)(size * loadFactor);
-            for (int i = 0; i < elementsToAdd; i++) {
-                int key = random.nextInt(size * 10);
-                table.put(key, "Value_" + key);
+        for (int i = 0; i < sizes.length; i++) {
+            int size = sizes[i];
+            HashTable<Integer> table = new HashTable<>(size * 2, hashFunction);
+
+            // Corrected for loop without invisible characters
+            for (int j = 0; j < size; j++) {
+                int value = rand.nextInt(size * 10);
+                while (table.find(value) != null) {
+                    value = rand.nextInt(size * 10);
+                }
+                table.insert(new DataItem<>(value));
             }
 
-            // Тестируем поиск
+            int[] searchValues = new int[searchIterations];
+            for (int j = 0; j < searchIterations; j++) {
+                searchValues[j] = rand.nextBoolean() ?
+                        rand.nextInt(size * 10) :
+                        size * 10 + rand.nextInt(size * 10);
+            }
+
             long startTime = System.nanoTime();
-            for (int i = 0; i < searchIterations; i++) {
-                table.get(random.nextInt(size * 10));
+            for (int value : searchValues) {
+                table.find(value);
             }
             long durationMs = (System.nanoTime() - startTime) / 1_000_000;
+            times[i] = (int) durationMs;
 
-            System.out.printf("%6d | %8d%n", size, durationMs);
+            System.out.printf("%6d  | %8d%n", size, durationMs);
         }
+
+        createChart(times);
+    }
+
+    private static void createChart(int[] times) {
+        int[] sizes = {100, 1_000, 10_000, 100_000, 1_000_000};
+        XYSeries series = new XYSeries("Хеш-таблица поиск");
+
+        for (int i = 0; i < sizes.length; i++) {
+            series.add(sizes[i], times[i]);
+        }
+
+        XYSeriesCollection dataset = new XYSeriesCollection();
+        dataset.addSeries(series);
+
+        JFreeChart chart = ChartFactory.createXYLineChart(
+                "Производительность хеш-таблицы",
+                "Размер таблицы",
+                "Время поиска (мс)",
+                dataset,
+                PlotOrientation.VERTICAL,
+                true, true, false
+        );
+
+        ChartFrame frame = new ChartFrame("График производительности", chart);
+        frame.pack();
+        frame.setVisible(true);
     }
 }

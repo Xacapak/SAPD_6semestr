@@ -6,7 +6,7 @@ import java.util.NoSuchElementException;
 
 public class BinSTreeTests {
     public static void BinSTreeShow(){
-        System.out.println("Запуск тестов....");
+        System.out.println("\nЗапуск тестов....");
         testTreeNode();
         testBinSTree();
         testBinSTreeIterator();

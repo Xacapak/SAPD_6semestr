@@ -4,21 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0a7aea9f-9b6f-4622-abf2-bd1d768f57d5" name="Changes" comment="Изменены методы класса BinSTree, может обращаться класс TreeNode.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Zabgu/BinSTreePerformanceChart.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Zabgu/BinSTreePerformanceTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Zabgu/BinSTreeTests.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/Big O.jpg" afterDir="false" />
+    <list default="true" id="0a7aea9f-9b6f-4622-abf2-bd1d768f57d5" name="Changes" comment="Задание 1, внесены изменения для теста производительности, график строится программно, добавлены тесты.">
+      <change afterPath="$PROJECT_DIR$/src/main/java/Zabgu/DataItem.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Zabgu/HashTableTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Zabgu/AVLTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Zabgu/AVLTree.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Zabgu/BSTInOrderIterator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Zabgu/BinSTreeIterator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Zabgu/BSTPerformanceTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Zabgu/BinSTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Zabgu/BinSTree.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Zabgu/BinSTreeTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Zabgu/BinSTreePerformanceChart.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Zabgu/BinSTreePerformanceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Zabgu/BinSTreePerformanceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Zabgu/BinSTreeTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Zabgu/BinSTreeTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Zabgu/HashTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Zabgu/HashTable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Zabgu/HashTableIterator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Zabgu/HashTableIterator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Zabgu/HashTablePerformanceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Zabgu/HashTablePerformanceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Zabgu/HashTableTests.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Zabgu/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Zabgu/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Zabgu/PerformanceTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Zabgu/TestingSearchPerformance.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,7 +53,7 @@
     "deletionFromPopupRequiresConfirmation": "false",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Xacapak/IdeaProjects/SAPD_6semestr/src/main/resources",
+    "last_opened_file_path": "C:/Users/Xacapak/IdeaProjects/untitled",
     "onboarding.tips.debug.path": "C:/Users/Xacapak/IdeaProjects/SAPD_6semestr/src/main/java/Zabgu/Main.java"
   }
 }]]></component>
@@ -154,7 +151,15 @@
       <option name="project" value="LOCAL" />
       <updated>1750698644140</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Задание 1, внесены изменения для теста производительности, график строится программно, добавлены тесты.">
+      <option name="closed" value="true" />
+      <created>1750776178722</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1750776178722</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -179,6 +184,7 @@
     <MESSAGE value="Внесены правки по коду, добавлены комментарии." />
     <MESSAGE value="Внесены правки по коду" />
     <MESSAGE value="Изменены методы класса BinSTree, может обращаться класс TreeNode." />
-    <option name="LAST_COMMIT_MESSAGE" value="Изменены методы класса BinSTree, может обращаться класс TreeNode." />
+    <MESSAGE value="Задание 1, внесены изменения для теста производительности, график строится программно, добавлены тесты." />
+    <option name="LAST_COMMIT_MESSAGE" value="Задание 1, внесены изменения для теста производительности, график строится программно, добавлены тесты." />
   </component>
 </project>
