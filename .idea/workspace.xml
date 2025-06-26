@@ -4,17 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0a7aea9f-9b6f-4622-abf2-bd1d768f57d5" name="Changes" comment="Задание 1, внесены изменения для теста производительности, график строится программно, добавлены тесты.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Zabgu/DataItem.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Zabgu/HashTableTest.java" afterDir="false" />
+    <list default="true" id="0a7aea9f-9b6f-4622-abf2-bd1d768f57d5" name="Changes" comment="Задание 2, исправлен полностью код на корректную Хеш-таблицу, скорректирована схема производительности, исправлены тесты.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Zabgu/BinSTreePerformanceChart.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Zabgu/BinSTreePerformanceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Zabgu/BinSTreePerformanceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Zabgu/BinSTreeTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Zabgu/BinSTreeTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Zabgu/HashTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Zabgu/HashTable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Zabgu/HashTableIterator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Zabgu/HashTableIterator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Zabgu/HashTablePerformanceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Zabgu/HashTablePerformanceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Zabgu/HashTableTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Zabgu/AVLPerformanceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Zabgu/AVLTreePerformanceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Zabgu/AVLTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Zabgu/AVLTreeTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Zabgu/AVLTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Zabgu/AVLTree.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Zabgu/Dictionary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Zabgu/Dictionary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Zabgu/DictionaryPerformanceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Zabgu/DictionaryPerformanceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Zabgu/DictionaryTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Zabgu/DictionaryTests.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Zabgu/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Zabgu/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -43,20 +40,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.-Xss4m.executor": "Run",
-    "Application.BSTPerformanceTest.executor": "Run",
-    "Application.Main.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "deletionFromPopupRequiresConfirmation": "false",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Xacapak/IdeaProjects/untitled",
-    "onboarding.tips.debug.path": "C:/Users/Xacapak/IdeaProjects/SAPD_6semestr/src/main/java/Zabgu/Main.java"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.-Xss4m.executor&quot;: &quot;Run&quot;,
+    &quot;Application.BSTPerformanceTest.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;deletionFromPopupRequiresConfirmation&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Xacapak/IdeaProjects/untitled&quot;,
+    &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/Xacapak/IdeaProjects/SAPD_6semestr/src/main/java/Zabgu/Main.java&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Xacapak\IdeaProjects\SAPD_6semestr\src\main\resources" />
@@ -159,7 +156,15 @@
       <option name="project" value="LOCAL" />
       <updated>1750776178722</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Задание 2, исправлен полностью код на корректную Хеш-таблицу, скорректирована схема производительности, исправлены тесты.">
+      <option name="closed" value="true" />
+      <created>1750867532367</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1750867532367</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -185,6 +190,7 @@
     <MESSAGE value="Внесены правки по коду" />
     <MESSAGE value="Изменены методы класса BinSTree, может обращаться класс TreeNode." />
     <MESSAGE value="Задание 1, внесены изменения для теста производительности, график строится программно, добавлены тесты." />
-    <option name="LAST_COMMIT_MESSAGE" value="Задание 1, внесены изменения для теста производительности, график строится программно, добавлены тесты." />
+    <MESSAGE value="Задание 2, исправлен полностью код на корректную Хеш-таблицу, скорректирована схема производительности, исправлены тесты." />
+    <option name="LAST_COMMIT_MESSAGE" value="Задание 2, исправлен полностью код на корректную Хеш-таблицу, скорректирована схема производительности, исправлены тесты." />
   </component>
 </project>

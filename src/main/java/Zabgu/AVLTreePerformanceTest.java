@@ -1,10 +1,8 @@
 package Zabgu;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
-
+import java.util.HashSet;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartFrame;
 import org.jfree.chart.JFreeChart;
@@ -12,9 +10,9 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
-public class DictionaryPerformanceTest {
+public class AVLTreePerformanceTest {
     public static void testSearchPerformance() {
-        System.out.println("\nТестирование времени поиска в Dictionary:");
+        System.out.println("\nТестирование времени поиска в AVL-дереве:");
         System.out.println("Размер  | Время (мс)");
         System.out.println("--------------------");
 
@@ -25,27 +23,28 @@ public class DictionaryPerformanceTest {
 
         for (int i = 0; i < sizes.length; i++) {
             int size = sizes[i];
-            Dictionary<Integer, String> dict = new Dictionary<>();
 
-            // Заполнение словаря случайными уникальными ключами
-            Set<Integer> uniqueKeys = new HashSet<>();
-            while (uniqueKeys.size() < size) {
-                uniqueKeys.add(rand.nextInt(size * 10));
-            }
-            for (Integer key : uniqueKeys) {
-                dict.put(key, "value_" + key);
+            Set<Integer> values = new HashSet<>();
+            while (values.size() < size) {
+                values.add(rand.nextInt(size * 10));
             }
 
-            int[] searchKeys = new int[searchIterations];
+            AVLTree<Integer> avl = new AVLTree<>();
+            for (int value : values) {
+                avl.insert(value);
+            }
+
+            int[] searchValues = new int[searchIterations];
+            Integer[] existingValues = values.toArray(new Integer[0]);
             for (int j = 0; j < searchIterations; j++) {
-                searchKeys[j] = rand.nextBoolean() ?
-                        new ArrayList<>(uniqueKeys).get(rand.nextInt(size)) :
-                        size * 10 + rand.nextInt(size * 10);
+                searchValues[j] = rand.nextBoolean() ?
+                        existingValues[rand.nextInt(existingValues.length)] :
+                        rand.nextInt(size * 10);
             }
 
             long startTime = System.nanoTime();
-            for (int key : searchKeys) {
-                dict.get(key);
+            for (int value : searchValues) {
+                avl.contains(value);
             }
             long durationMs = (System.nanoTime() - startTime) / 1_000_000;
             times[i] = (int) durationMs;
@@ -57,7 +56,7 @@ public class DictionaryPerformanceTest {
     }
 
     private static void createChart(int[] sizes, int[] times) {
-        XYSeries series = new XYSeries("Dictionary поиск");
+        XYSeries series = new XYSeries("AVL-дерево поиск");
 
         for (int i = 0; i < sizes.length; i++) {
             series.add(sizes[i], times[i]);
@@ -67,15 +66,15 @@ public class DictionaryPerformanceTest {
         dataset.addSeries(series);
 
         JFreeChart chart = ChartFactory.createXYLineChart(
-                "Производительность Dictionary",
-                "Размер словаря",
+                "Производительность AVL-дерева",
+                "Размер дерева",
                 "Время поиска (мс)",
                 dataset,
                 PlotOrientation.VERTICAL,
                 true, true, false
         );
 
-        ChartFrame frame = new ChartFrame("График производительности Dictionary", chart);
+        ChartFrame frame = new ChartFrame("График производительности AVL-дерева", chart);
         frame.pack();
         frame.setVisible(true);
     }

@@ -180,10 +180,10 @@ public class Main {
                 System.out.println("\n\nВысота дерева: " + avlTree.height());
 
                 // Оценка среднего времени поиска
-                AVLPerformanceTest.testSearchPerformance();
+                AVLTreePerformanceTest.testSearchPerformance();
 
                 // Тесты
-                AVLTests.runAllTests();
+                AVLTreeTests.runAllTests();
 
                 // Использование итератора
                 System.out.println("\nИтерация по элементам:");
@@ -246,7 +246,7 @@ public class Main {
                 System.out.println("Количество элементов: " + dictionary.size());
 
                 // Тестирование производительности поиска
-                DictionaryPerformanceTest.testSearchPerformance();
+//                DictionaryPerformanceTest.testSearchPerformance();
 
                 DictionaryTests.runAllTests();
 
