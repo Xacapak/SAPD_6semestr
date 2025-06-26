@@ -9,7 +9,15 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
+/**
+ * Класс для тестирования производительности хеш-таблицы.
+ * Измеряет время поиска элементов и строит график зависимости времени от размера таблицы.
+ */
 public class HashTablePerformanceTest {
+    /**
+     * Тестирует производительность поиска в хеш-таблице для разных размеров.
+     * Выводит результаты в консоль и строит график.
+     */
     public static void testSearchPerformance() {
         System.out.println("\nТестирование времени поиска в хеш-таблице:");
         System.out.println("Размер  | Время (мс)");
@@ -20,6 +28,7 @@ public class HashTablePerformanceTest {
         int[] times = new int[sizes.length];
         Random rand = new Random();
 
+        // Хеш-функция с улучшенным распределением
         Function<Integer, Integer> hashFunction = key -> {
             key = ((key >> 16) ^ key) * 0x45d9f3b;
             key = ((key >> 16) ^ key) * 0x45d9f3b;
@@ -28,9 +37,10 @@ public class HashTablePerformanceTest {
 
         for (int i = 0; i < sizes.length; i++) {
             int size = sizes[i];
+            // Создаем таблицу в 2 раза больше для уменьшения коллизий
             HashTable<Integer> table = new HashTable<>(size * 2, hashFunction);
 
-            // Corrected for loop without invisible characters
+            // Заполняем таблицу уникальными значениями
             for (int j = 0; j < size; j++) {
                 int value = rand.nextInt(size * 10);
                 while (table.find(value) != null) {
@@ -39,6 +49,7 @@ public class HashTablePerformanceTest {
                 table.insert(new DataItem<>(value));
             }
 
+            // Подготовка значений для поиска (50% существующих, 50% случайных)
             int[] searchValues = new int[searchIterations];
             for (int j = 0; j < searchIterations; j++) {
                 searchValues[j] = rand.nextBoolean() ?
@@ -46,6 +57,7 @@ public class HashTablePerformanceTest {
                         size * 10 + rand.nextInt(size * 10);
             }
 
+            // Измерение времени поиска
             long startTime = System.nanoTime();
             for (int value : searchValues) {
                 table.find(value);
@@ -59,6 +71,10 @@ public class HashTablePerformanceTest {
         createChart(times);
     }
 
+    /**
+     * Создает график зависимости времени поиска от размера таблицы
+     * @param times массив времени выполнения для каждого размера таблицы
+     */
     private static void createChart(int[] times) {
         int[] sizes = {100, 1_000, 10_000, 100_000, 1_000_000};
         XYSeries series = new XYSeries("Хеш-таблица поиск");

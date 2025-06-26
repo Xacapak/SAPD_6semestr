@@ -8,7 +8,21 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
+/**
+ * Класс для тестирования производительности операций поиска в бинарном дереве поиска (BST)
+ * и визуализации результатов с использованием библиотеки JFreeChart.
+ */
 public class BinSTreePerformanceTest {
+    /**
+     * Тестирует производительность поиска в BST для различных размеров дерева.
+     * Выводит результаты в консоль и строит график зависимости времени поиска от размера дерева.
+     *
+     * Метод выполняет следующие действия:
+     *   Создает деревья разных размеров (100, 1 000, 10 000, 100 000, 1 000 000 элементов)
+     *   Для каждого дерева выполняет 100 000 операций поиска (50% существующих и 50% случайных значений)
+     *   Измеряет и выводит время выполнения операций поиска
+     *   Строит график зависимости времени от размера дерева
+     */
     public static void testSearchPerformance() {
         System.out.println("\nТестирование времени поиска в 'Бинарном дереве поиска':");
         System.out.println("Размер  | Время (мс)");
@@ -23,6 +37,7 @@ public class BinSTreePerformanceTest {
             int size = sizes[i];
             BinSTree<Integer> tree = new BinSTree<>();
 
+            // Заполнение дерева уникальными случайными значениями
             for (int j = 0; j < size; j++) {
                 int value = rand.nextInt(size * 10);
                 while (tree.find(value) != null) {
@@ -31,6 +46,7 @@ public class BinSTreePerformanceTest {
                 tree.insert(value);
             }
 
+            // Подготовка значений для поиска (50% существующих, 50% случайных)
             int[] searchValues = new int[searchIterations];
             for (int j = 0; j < searchIterations; j++) {
                 searchValues[j] = rand.nextBoolean() ?
@@ -38,6 +54,7 @@ public class BinSTreePerformanceTest {
                         size * 10 + rand.nextInt(size * 10);
             }
 
+            // Измерение времени поиска
             long startTime = System.nanoTime();
             for (int value : searchValues) {
                 tree.find(value);
@@ -51,10 +68,16 @@ public class BinSTreePerformanceTest {
         createChart(times);
     }
 
+    /**
+     * Создает и отображает график зависимости времени поиска от размера дерева.
+     *
+     * @param times массив времени выполнения операций поиска для каждого размера дерева (в мс)
+     */
     private static void createChart(int[] times) {
         int[] sizes = {100, 1_000, 10_000, 100_000, 1_000_000};
         XYSeries series = new XYSeries("BST Поиск");
 
+        // Заполнение данных для графика
         for (int i = 0; i < sizes.length; i++) {
             series.add(sizes[i], times[i]);
         }
@@ -62,6 +85,7 @@ public class BinSTreePerformanceTest {
         XYSeriesCollection dataset = new XYSeriesCollection();
         dataset.addSeries(series);
 
+        // Создание графика
         JFreeChart chart = ChartFactory.createXYLineChart(
                 "Зависимость времени поиска от размера BST",
                 "Размер дерева (элементы)",
@@ -71,6 +95,7 @@ public class BinSTreePerformanceTest {
                 true, true, false
         );
 
+        // Отображение графика в отдельном окне
         ChartFrame frame = new ChartFrame("BST график", chart);
         frame.pack();
         frame.setVisible(true);

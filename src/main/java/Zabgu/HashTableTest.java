@@ -1,11 +1,26 @@
 package Zabgu;
 
+/**
+ * Класс для модульного тестирования функциональности хеш-таблицы.
+ * Содержит тесты основных операций и итератора.
+ */
 public class HashTableTest {
+    /**
+     * Запускает все тесты для хеш-таблицы
+     */
     public static void startTest(){
         System.out.println("\nЗапуск тестов....");
         testTableOperations();
         testIterator();
     }
+
+    /**
+     * Тестирует основные операции хеш-таблицы:
+     * - Вставка и поиск элементов
+     * - Обработка коллизий
+     * - Удаление элементов
+     * - Очистка таблицы
+     */
     private static void testTableOperations() {
         HashTable<Integer> table = new HashTable<>(10, key -> key % 10);
 
@@ -30,6 +45,11 @@ public class HashTableTest {
         System.out.println("Тестирование HashTable.....Завершено.");
     }
 
+    /**
+     * Тестирует итератор хеш-таблицы:
+     * - Корректность обхода всех элементов
+     * - Пропуск удаленных элементов
+     */
     private static void testIterator() {
         HashTable<Integer> table = new HashTable<>(10, key -> key % 10);
         table.insert(new DataItem<>(3));

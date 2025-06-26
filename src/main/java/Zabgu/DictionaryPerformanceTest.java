@@ -12,7 +12,15 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
+/**
+ * Класс для тестирования производительности Dictionary.
+ * Измеряет время поиска элементов при разных размерах словаря.
+ */
 public class DictionaryPerformanceTest {
+    /**
+     * Тестирует производительность поиска в Dictionary.
+     * Выводит результаты в консоль и строит график зависимости времени от размера.
+     */
     public static void testSearchPerformance() {
         System.out.println("\nТестирование времени поиска в Dictionary:");
         System.out.println("Размер  | Время (мс)");
@@ -36,6 +44,7 @@ public class DictionaryPerformanceTest {
                 dict.put(key, "value_" + key);
             }
 
+            // Подготовка ключей для поиска (50% существующих, 50% случайных)
             int[] searchKeys = new int[searchIterations];
             for (int j = 0; j < searchIterations; j++) {
                 searchKeys[j] = rand.nextBoolean() ?
@@ -43,6 +52,7 @@ public class DictionaryPerformanceTest {
                         size * 10 + rand.nextInt(size * 10);
             }
 
+            // Измерение времени поиска
             long startTime = System.nanoTime();
             for (int key : searchKeys) {
                 dict.get(key);
@@ -56,6 +66,11 @@ public class DictionaryPerformanceTest {
         createChart(sizes, times);
     }
 
+    /**
+     * Создает график зависимости времени поиска от размера словаря.
+     * @param sizes массив размеров словаря
+     * @param times массив времени выполнения для каждого размера
+     */
     private static void createChart(int[] sizes, int[] times) {
         XYSeries series = new XYSeries("Dictionary поиск");
 

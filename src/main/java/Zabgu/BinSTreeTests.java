@@ -4,7 +4,18 @@ import java.util.List;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+/**
+ * Класс для тестирования функциональности бинарного дерева поиска (BST).
+ * Содержит модульные тесты для TreeNode, BinSTree и BinSTreeIterator.
+ */
 public class BinSTreeTests {
+    /**
+     * Запускает все тесты для BST и выводит результаты в консоль.
+     * Последовательно выполняет тесты:
+     * 1. TreeNode - базовой структуры узла
+     * 2. BinSTree - основных операций дерева
+     * 3. BinSTreeIterator - итератора дерева
+     */
     public static void BinSTreeShow(){
         System.out.println("\nЗапуск тестов....");
         testTreeNode();
@@ -12,6 +23,13 @@ public class BinSTreeTests {
         testBinSTreeIterator();
     }
 
+    /**
+     * Тестирует базовую функциональность класса TreeNode.
+     * Проверяет:
+     * - Корректность хранения значения в узле
+     * - Инициализацию потомков как null
+     * - Возможность установки левого и правого потомков
+     */
     public static void testTreeNode() {
 
         TreeNode<Integer> node = new TreeNode<>(10);
@@ -26,6 +44,17 @@ public class BinSTreeTests {
         System.out.println("Тестирование TreeNode.....Завершено.");
     }
 
+    /**
+     * Тестирует основные операции бинарного дерева поиска (BinSTree).
+     * Проверяет:
+     * - Инициализацию пустого дерева
+     * - Вставку элементов (insert)
+     * - Поиск элементов (find)
+     * - Обходы дерева (traverseLNR, traverseRNL)
+     * - Удаление элементов (remove)
+     * - Подсчет размера (size)
+     * - Вычисление глубины (depth)
+     */
     public static void testBinSTree() {
 
         BinSTree<Integer> tree = new BinSTree<>();
@@ -52,7 +81,15 @@ public class BinSTreeTests {
         System.out.println("Тестирование BinSTree.....Завершено.");
     }
 
-    // 3. Тесты для BinSTreeIterator
+    /**
+     * Тестирует итератор бинарного дерева поиска (BinSTreeIterator).
+     * Проверяет:
+     * - Корректность работы foreach-синтаксиса
+     * - Последовательность элементов при итерации (должна соответствовать LNR)
+     * - Метод hasNext()
+     * - Метод next()
+     * - Генерацию исключения при попытке получить элемент после окончания итерации
+     */
     public static void testBinSTreeIterator() {
 
         BinSTree<Integer> tree = new BinSTree<>();

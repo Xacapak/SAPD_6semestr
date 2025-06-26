@@ -1,6 +1,13 @@
 package Zabgu;
 
+/**
+ * Класс для модульного тестирования Dictionary.
+ * Содержит тесты всех основных операций словаря.
+ */
 public class DictionaryTests {
+    /**
+     * Запускает все тесты для Dictionary.
+     */
     public static void runAllTests() {
         System.out.println("\nЗапуск тестов словаря...");
         testPutAndGet();
@@ -12,6 +19,9 @@ public class DictionaryTests {
         System.out.println("Все тесты словаря пройдены успешно!");
     }
 
+    /**
+     * Тестирует операции добавления и получения элементов.
+     */
     public static void testPutAndGet() {
         Dictionary<String, Integer> dict = new Dictionary<>();
         dict.put("apple", 10);
@@ -27,6 +37,9 @@ public class DictionaryTests {
         System.out.println("Тест PutAndGet пройден");
     }
 
+    /**
+     * Тестирует проверку наличия ключа.
+     */
     public static void testContainsKey() {
         Dictionary<Integer, String> dict = new Dictionary<>();
         dict.put(1, "one");
@@ -37,6 +50,9 @@ public class DictionaryTests {
         System.out.println("Тест ContainsKey пройден");
     }
 
+    /**
+     * Тестирует удаление элементов.
+     */
     public static void testRemove() {
         Dictionary<String, Double> dict = new Dictionary<>();
         dict.put("pi", 3.14);
@@ -48,6 +64,9 @@ public class DictionaryTests {
         System.out.println("Тест Remove пройден");
     }
 
+    /**
+     * Тестирует подсчет размера словаря.
+     */
     public static void testSize() {
         Dictionary<Character, Boolean> dict = new Dictionary<>();
         assert dict.size() == 0 : "Размер пустого словаря должен быть 0";
@@ -65,6 +84,9 @@ public class DictionaryTests {
         System.out.println("Тест Size пройден");
     }
 
+    /**
+     * Тестирует очистку словаря.
+     */
     public static void testClear() {
         Dictionary<String, Integer> dict = new Dictionary<>();
         dict.put("one", 1);
@@ -77,6 +99,9 @@ public class DictionaryTests {
         System.out.println("Тест Clear пройден");
     }
 
+    /**
+     * Тестирует итератор словаря.
+     */
     public static void testIterator() {
         Dictionary<Integer, String> dict = new Dictionary<>();
         dict.put(3, "three");

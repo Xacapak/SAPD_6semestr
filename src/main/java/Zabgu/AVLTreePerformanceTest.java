@@ -10,7 +10,16 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
+/**
+ * Класс для тестирования производительности AVL-дерева.
+ * Измеряет время поиска элементов и строит график зависимости времени от размера дерева.
+ */
 public class AVLTreePerformanceTest {
+    /**
+     * Тестирует производительность поиска в AVL-дереве.
+     * Заполняет дерево случайными уникальными значениями и измеряет время поиска.
+     * Выводит результаты в консоль и строит график.
+     */
     public static void testSearchPerformance() {
         System.out.println("\nТестирование времени поиска в AVL-дереве:");
         System.out.println("Размер  | Время (мс)");
@@ -24,16 +33,19 @@ public class AVLTreePerformanceTest {
         for (int i = 0; i < sizes.length; i++) {
             int size = sizes[i];
 
+            // Генерация уникальных значений
             Set<Integer> values = new HashSet<>();
             while (values.size() < size) {
                 values.add(rand.nextInt(size * 10));
             }
 
+            // Заполнение дерева
             AVLTree<Integer> avl = new AVLTree<>();
             for (int value : values) {
                 avl.insert(value);
             }
 
+            // Подготовка значений для поиска (50% существующих, 50% случайных)
             int[] searchValues = new int[searchIterations];
             Integer[] existingValues = values.toArray(new Integer[0]);
             for (int j = 0; j < searchIterations; j++) {
@@ -42,6 +54,7 @@ public class AVLTreePerformanceTest {
                         rand.nextInt(size * 10);
             }
 
+            // Измерение времени поиска
             long startTime = System.nanoTime();
             for (int value : searchValues) {
                 avl.contains(value);
@@ -55,6 +68,11 @@ public class AVLTreePerformanceTest {
         createChart(sizes, times);
     }
 
+    /**
+     * Создает график зависимости времени поиска от размера дерева.
+     * @param sizes массив размеров дерева
+     * @param times массив времени выполнения для каждого размера
+     */
     private static void createChart(int[] sizes, int[] times) {
         XYSeries series = new XYSeries("AVL-дерево поиск");
 
