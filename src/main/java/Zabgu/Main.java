@@ -82,7 +82,9 @@ public class Main {
 
                 // 9. Использование Итератора
                 System.out.println("\nИспользование Итератора, вывод методом LNR: ");
-                for (Integer value : tree) {
+                Iterator<Integer> it = tree.iterator();
+                while (it.hasNext()) {
+                    Integer value = it.next();
                     System.out.print(value + " ");
                 }
 
@@ -135,8 +137,10 @@ public class Main {
                 Table.insert(new DataItem<>(25));
 
                 System.out.println("\nЭлементы таблицы:");
-                for (DataItem<Integer> item : Table) {
-                    System.out.print(item.getKey() + " ");
+                Iterator<DataItem<Integer>> iterator = Table.iterator();
+                while (iterator.hasNext()) {
+                    DataItem<Integer> item = iterator.next();
+                    System.out.println(item.getKey());
                 }
 
                 // 5. Эффективность тестирования при поиске
@@ -246,7 +250,7 @@ public class Main {
                 System.out.println("Количество элементов: " + dictionary.size());
 
                 // Тестирование производительности поиска
-//                DictionaryPerformanceTest.testSearchPerformance();
+                DictionaryPerformanceTest.testSearchPerformance();
 
                 DictionaryTests.runAllTests();
 

@@ -25,7 +25,7 @@ public class AVLTreePerformanceTest {
         System.out.println("Размер  | Время (мс)");
         System.out.println("--------------------");
 
-        int[] sizes = {100, 1_000, 10_000, 100_000, 1_000_000};
+        int[] sizes = {100, 1_000, 10_000, 100_000, 500_000,1_000_000};
         int searchIterations = 100_000;
         int[] times = new int[sizes.length];
         Random rand = new Random();
